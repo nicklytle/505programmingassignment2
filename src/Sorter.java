@@ -30,9 +30,9 @@ public abstract class Sorter {
 	public static void read() {
 		in = new Scanner(System.in); // read in from Standard Input
 		integerList = new ArrayList<Integer>(); // instantiate list
-		numItems = Integer.parseInt(in.nextLine().replaceAll("[\\D]", ""));// read number of items
-		for (int i = 0; i < numItems; i++) { // for number of items
-			integerList.add(in.nextInt());// add item to list
+//		numItems = Integer.parseInt(in.nextLine().replaceAll("[\\D]", ""));// read number of items
+		while(in.hasNextInt()) {
+			integerList.add(in.nextInt());
 		}
 		in.close();
 	}
