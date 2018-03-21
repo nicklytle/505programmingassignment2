@@ -44,10 +44,10 @@ public abstract class Sorter {
 	 * 
 	 * @param integerList The resulting sorted list of integers.
 	 */
-	public static void write(ArrayList<Integer> integerList) {
-		for (Integer g : integerList) {
-			System.out.println(g.toString());
-		}
+	public static void write(Integer k) {
+//		for (Integer g : integerList) {
+//			System.out.println(g.toString());
+//		}
 		/*
 		 * Print to Standard Error the runtime (expressed in milliseconds) and the
 		 * number of comparisons. Lines 52 and 53 are the output required for class
@@ -55,6 +55,8 @@ public abstract class Sorter {
 		 */
 		System.err.println("runtime," + (int)( runtime / 1000000));
 		System.err.println("comparisons," + numComparisons);
+		
+		System.out.println(k);
 
 		// System.err.println((int) runtime / 1000000 + "," + numComparisons);
 	}

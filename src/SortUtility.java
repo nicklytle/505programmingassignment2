@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Collections;
 
 /**
@@ -15,12 +16,21 @@ public class SortUtility extends Sorter {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		read();
+		//read();
+		integerList = new ArrayList<>();
+		integerList.add(10);
+		integerList.add(4);
+		integerList.add(5);
+		integerList.add(8);
+		integerList.add(6);
+		integerList.add(11);
+		integerList.add(26);
 		startTime = System.nanoTime();
 		Collections.sort(integerList, comp);
 		endTime = System.nanoTime();
 		runtime = endTime - startTime;
-		write(integerList);
+		int mid = (int) Math.floor((integerList.size())/2);
+		write(integerList.get(mid - 1));
 
 	}
 

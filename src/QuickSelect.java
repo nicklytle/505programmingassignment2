@@ -7,18 +7,21 @@ public class QuickSelect extends Sorter{
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ArrayList<Integer> test = new ArrayList<>();
-		test.add(10);
-		test.add(4);
-		test.add(5);
-		test.add(8);
-		test.add(6);
-		test.add(11);
-		test.add(26);
+		integerList = new ArrayList<>();
+		integerList.add(10);
+		integerList.add(4);
+		integerList.add(5);
+		integerList.add(8);
+		integerList.add(6);
+		integerList.add(11);
+		integerList.add(26);
 		
-		int k = (int) Math.floor((test.size()+1)/2);
-		
-		System.out.println(quickselect(test, 0, test.size() - 1, k));
+		int mid = (int) Math.floor((integerList.size()+1)/2);
+		startTime = System.nanoTime();
+		int k = quickselect(integerList, 0, integerList.size() - 1, mid);
+		endTime = System.nanoTime();
+		runtime = endTime - startTime;
+		write(k);
 	}
 	
 	public static int partition(ArrayList<Integer> list, int left, int right, int pivotIndex) {
