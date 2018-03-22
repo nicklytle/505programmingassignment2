@@ -127,13 +127,9 @@ public class QuickSelect extends Sorter {
 	}
 
 	public static int median(int left, int leftVal, int right, int rightVal, int middle, int middleVal) {
-		if (rightVal >= leftVal && rightVal <= middleVal) {
+		if(comp.compare(rightVal, leftVal) == comp.compare(middle, rightVal)) {
 			return right;
-		} else if (rightVal >= middleVal && rightVal <= leftVal) {
-			return right;
-		} else if (leftVal >= rightVal && leftVal <= middleVal) {
-			return left;
-		} else if (leftVal >= middleVal && leftVal <= rightVal) {
+		} else if (comp.compare(leftVal, rightVal) == comp.compare(middle, leftVal)) {
 			return left;
 		} else {
 			return middle;
