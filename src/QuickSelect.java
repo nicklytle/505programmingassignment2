@@ -3,8 +3,14 @@ import java.util.ArrayList;
 /**
  * @author bjanos
  * 
- *         A class that implements the recursive version of the quickselect
- *         algorithm
+ *         A class that implements the recursive version of the quickselect.
+ *         This algorithm draws from quicksort and uses partitioning to find the
+ *         kth largest element, where k is the median value of the array. The
+ *         partitioning occurs in place and is drawn from pseudocode found in
+ *         Introduction to Algorithms 3rd e by Cormen. The quickselect algorithm
+ *         is largely based off of notes from CSC 505 Moodle site, however
+ *         modifications were made to accommodate the program directions.
+ * 
  *
  */
 public class QuickSelect extends Sorter {
@@ -34,31 +40,16 @@ public class QuickSelect extends Sorter {
 	}
 
 	/**
+	 * Partitions an array of integers.
+	 * 
 	 * @param list
+	 *            A list of integers to be partitioned
 	 * @param left
+	 *            The first index
 	 * @param right
-	 * @param pivotIndex
-	 * @return
+	 *            The last index
+	 * @return The index partitioned about
 	 */
-	// public static int partition(ArrayList<Integer> list, int left, int right, int
-	// pivotIndex) {
-	// int pivotVal = list.get(pivotIndex);
-	// list.set(pivotIndex, list.get(right));
-	// list.set(right, pivotVal);
-	// int storeIndex = left;
-	// for (int i = left; i < right; i++) {
-	// if (comp.compare(list.get(i), pivotVal) < 0) {
-	// int temp = list.get(storeIndex);
-	// list.set(storeIndex, list.get(i));
-	// list.set(i, temp);
-	// storeIndex++;
-	// }
-	// }
-	// int temp = list.get(right);
-	// list.set(right, list.get(storeIndex));
-	// list.set(storeIndex, temp);
-	// return storeIndex;
-	// }
 	public static int partition(ArrayList<Integer> list, int left, int right) {
 		int x = list.get(right);
 		int i = left - 1;
@@ -77,6 +68,19 @@ public class QuickSelect extends Sorter {
 		return i + 1;
 	}
 
+	/**
+	 * A method to recursively find the median of a list of integers.
+	 * 
+	 * @param list
+	 *            The list to find the median within
+	 * @param left
+	 *            The first index
+	 * @param right
+	 *            The last index
+	 * @param k
+	 *            The position of the median
+	 * @return The value of the median
+	 */
 	public static int quickselect(ArrayList<Integer> list, int left, int right, int k) {
 		if (right - left > 1) {
 			int pivotIndex = left + (int) Math.floor(Math.random() * (right - left + 1));
