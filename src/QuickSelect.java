@@ -28,8 +28,8 @@ public class QuickSelect extends Sorter {
 		integerList.add(5);
 		integerList.add(8);
 		integerList.add(6);
-		// integerList.add(11);
-		// integerList.add(26);
+		integerList.add(11);
+		integerList.add(26);
 
 		int mid = (int) Math.floor((integerList.size() - 1) / 2);
 		startTime = System.nanoTime();
@@ -83,7 +83,13 @@ public class QuickSelect extends Sorter {
 	 */
 	public static int quickselect(ArrayList<Integer> list, int left, int right, int k) {
 		if (right - left > 1) {
-			int pivotIndex = left + (int) Math.floor(Math.random() * (right - left + 1));
+			// int pivotIndex = left + (int) Math.floor(Math.random() * (right - left + 1));
+			int pivotIndex;
+			if(list.size() >= 9) {
+				pivotIndex = median(list.get(left), list.get(right), list.get((int) Math.floor((list.size() + 1) / 2)));
+			} else {
+				pivotIndex = list.get(left);
+			}
 			pivotIndex = partition(list, left, right);
 			if (k == pivotIndex) {
 				return list.get(k);
@@ -97,6 +103,20 @@ public class QuickSelect extends Sorter {
 			ArrayList<Integer> sorted = InsertionSort.nonRecursiveInsertionSort(list);
 			int mid = (int) Math.floor((sorted.size() - 1) / 2);
 			return sorted.get(mid);
+		}
+	}
+
+	public static int median(int left, int right, int middle) {
+		if (right >= left && right <= middle) {
+			return right;
+		} else if (right >= middle && right <= left) {
+			return right;
+		} else if (left >= right && left <= middle) {
+			return left;
+		} else if (left >= middle && left <= right) {
+			return left;
+		} else {
+			return middle;
 		}
 	}
 
