@@ -56,7 +56,9 @@ public class QuickSelect extends Sorter{
 			}
 			
 		} else {
-			return list.get(left);
+			ArrayList<Integer> sorted = InsertionSort.nonRecursiveInsertionSort(list);
+			int mid = (int) Math.floor((sorted.size() - 1)/2);
+			return sorted.get(mid);
 		}
 	}
 
