@@ -15,7 +15,7 @@ public abstract class Sorter {
 
 	static ArrayList<Integer> integerList;
 	static Scanner in;
-	//static int numItems;
+	// static int numItems;
 	static double runtime = 0.0;
 	static int numComparisons = 0;
 	static double startTime;
@@ -30,8 +30,9 @@ public abstract class Sorter {
 	public static void read() {
 		in = new Scanner(System.in); // read in from Standard Input
 		integerList = new ArrayList<Integer>(); // instantiate list
-//		numItems = Integer.parseInt(in.nextLine().replaceAll("[\\D]", ""));// read number of items
-		while(in.hasNextInt()) {
+		// numItems = Integer.parseInt(in.nextLine().replaceAll("[\\D]", ""));// read
+		// number of items
+		while (in.hasNextInt()) {
 			integerList.add(in.nextInt());
 		}
 		in.close();
@@ -42,20 +43,21 @@ public abstract class Sorter {
 	 * the runtime (milliseconds expressed as an integer) and the number of
 	 * comparisons the sorting function performed.
 	 * 
-	 * @param integerList The resulting sorted list of integers.
+	 * @param integerList
+	 *            The resulting sorted list of integers.
 	 */
 	public static void write(Integer k) {
-//		for (Integer g : integerList) {
-//			System.out.println(g.toString());
-//		}
+		// for (Integer g : integerList) {
+		// System.out.println(g.toString());
+		// }
 		/*
 		 * Print to Standard Error the runtime (expressed in milliseconds) and the
 		 * number of comparisons. Lines 52 and 53 are the output required for class
 		 * where line 55 allows the output to a CSV file to make data analysis easier.
 		 */
-		System.err.println("runtime," + (int)( runtime / 1000000));
+		System.err.println("runtime," + (int) (runtime / 1000000));
 		System.err.println("comparisons," + numComparisons);
-		
+
 		System.out.println(k);
 
 		// System.err.println((int) runtime / 1000000 + "," + numComparisons);
