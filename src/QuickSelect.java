@@ -13,10 +13,10 @@ public class QuickSelect extends Sorter{
 		integerList.add(5);
 		integerList.add(8);
 		integerList.add(6);
-		integerList.add(11);
-		integerList.add(26);
+//		integerList.add(11);
+//		integerList.add(26);
 		
-		int mid = (int) Math.floor((integerList.size()+1)/2);
+		int mid = (int) Math.floor((integerList.size()-1)/2);
 		startTime = System.nanoTime();
 		int k = quickselect(integerList, 0, integerList.size() - 1, mid);
 		endTime = System.nanoTime();
@@ -58,20 +58,6 @@ public class QuickSelect extends Sorter{
 		} else {
 			return list.get(left);
 		}
-//		if(left == right) {
-//			return list.get(left); 
-//		}
-//		
-//		int pivotIndex = (int)Math.floor((list.size()-1)/2);
-//		pivotIndex = partition(list, left, right, pivotIndex);
-//		
-//		if(k == pivotIndex) {
-//			return list.get(k);
-//		} else if (k < pivotIndex) {
-//			return quickselect(list, left, pivotIndex - 1, k);
-//		} else {
-//			return quickselect(list, pivotIndex + 1, right, k);
-//		}
 	}
 
 }

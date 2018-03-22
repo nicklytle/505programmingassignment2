@@ -15,7 +15,7 @@ public abstract class Sorter {
 
 	static ArrayList<Integer> integerList;
 	static Scanner in;
-	static int numItems;
+	//static int numItems;
 	static double runtime = 0.0;
 	static int numComparisons = 0;
 	static double startTime;
@@ -54,7 +54,7 @@ public abstract class Sorter {
 		 * where line 55 allows the output to a CSV file to make data analysis easier.
 		 */
 		System.err.println("runtime," + (int)( runtime / 1000000));
-		System.err.println("comparisons," + numComparisons);
+//		System.err.println("comparisons," + numComparisons);
 		
 		System.out.println(k);
 

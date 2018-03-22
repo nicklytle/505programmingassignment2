@@ -23,14 +23,15 @@ public class SortUtility extends Sorter {
 		integerList.add(5);
 		integerList.add(8);
 		integerList.add(6);
-		integerList.add(11);
-		integerList.add(26);
+//		integerList.add(11);
+//		integerList.add(26);
 		startTime = System.nanoTime();
 		Collections.sort(integerList, comp);
 		endTime = System.nanoTime();
 		runtime = endTime - startTime;
-		int mid = (int) Math.floor((integerList.size())/2);
-		write(integerList.get(mid - 1));
+		int mid = (int) Math.floor((integerList.size() - 1)/2);
+		System.out.println(mid);
+		write(integerList.get(mid));
 
 	}
 
