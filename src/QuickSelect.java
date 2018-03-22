@@ -30,6 +30,9 @@ public class QuickSelect extends Sorter {
 		integerList.add(6);
 		integerList.add(11);
 		integerList.add(26);
+		integerList.add(32);
+		integerList.add(2);
+		integerList.add(9);
 
 		int mid = (int) Math.floor((integerList.size() - 1) / 2);
 		startTime = System.nanoTime();
@@ -50,22 +53,38 @@ public class QuickSelect extends Sorter {
 	 *            The last index
 	 * @return The index partitioned about
 	 */
-	public static int partition(ArrayList<Integer> list, int left, int right) {
-		int x = list.get(right);
-		int i = left - 1;
-		for (int j = left; j < right; j++) {
-			if (comp.compare(list.get(j), x) < 0) {
-				i++;
-				int temp = list.get(i);
-				list.set(i, list.get(j));
-				list.set(j, temp);
+	public static int partition(ArrayList<Integer> list, int left, int right, int pivot) {
+		int pivotVal = list.get(pivot);
+		list.set(pivot, list.get(right));
+		list.set(right, pivotVal);
+		int storeIndex = left;
+		for(int i = left; i < right; i++) {
+			if(comp.compare(list.get(i), pivotVal) < 0) {
+				int temp = list.get(storeIndex);
+				list.set(storeIndex, list.get(i));
+				list.set(i, temp);
+				storeIndex++;
 			}
 		}
-		int temp = list.get(i + 1);
-		list.set(i + 1, list.get(right));
-		list.set(right, temp);
-
-		return i + 1;
+		int temp = list.get(right);
+		list.set(right, list.get(storeIndex));
+		list.set(storeIndex, temp);
+		return storeIndex;
+//		int pivotVal = list.get(pivot);
+//		int i = left - 1;
+//		for (int j = left; j < right; j++) {
+//			if (comp.compare(list.get(j), pivotVal) < 0) {
+//				i++;
+//				int temp = list.get(i);
+//				list.set(i, list.get(j));
+//				list.set(j, temp);
+//			}
+//		}
+//		int temp = list.get(i + 1);
+//		list.set(i + 1, pivotVal);
+//		list.set(pivot, temp);
+//
+//		return i + 1;
 	}
 
 	/**
@@ -86,11 +105,12 @@ public class QuickSelect extends Sorter {
 			// int pivotIndex = left + (int) Math.floor(Math.random() * (right - left + 1));
 			int pivotIndex;
 			if(list.size() >= 9) {
-				pivotIndex = median(list.get(left), list.get(right), list.get((int) Math.floor((list.size() + 1) / 2)));
+				int mid = (int) Math.floor((list.size() + 1) / 2);
+				pivotIndex = median(left, list.get(left), right, list.get(right), mid, list.get(mid));
 			} else {
-				pivotIndex = list.get(left);
+				pivotIndex = right;
 			}
-			pivotIndex = partition(list, left, right);
+			pivotIndex = partition(list, left, right, pivotIndex);
 			if (k == pivotIndex) {
 				return list.get(k);
 			} else if (k < pivotIndex) {
@@ -106,14 +126,14 @@ public class QuickSelect extends Sorter {
 		}
 	}
 
-	public static int median(int left, int right, int middle) {
-		if (right >= left && right <= middle) {
+	public static int median(int left, int leftVal, int right, int rightVal, int middle, int middleVal) {
+		if (rightVal >= leftVal && rightVal <= middleVal) {
 			return right;
-		} else if (right >= middle && right <= left) {
+		} else if (rightVal >= middleVal && rightVal <= leftVal) {
 			return right;
-		} else if (left >= right && left <= middle) {
+		} else if (leftVal >= rightVal && leftVal <= middleVal) {
 			return left;
-		} else if (left >= middle && left <= right) {
+		} else if (leftVal >= middleVal && leftVal <= rightVal) {
 			return left;
 		} else {
 			return middle;
