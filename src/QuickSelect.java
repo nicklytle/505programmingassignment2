@@ -8,7 +8,7 @@ public class QuickSelect extends Sorter{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		integerList = new ArrayList<>();
-		integerList.add(10);
+//		integerList.add(10);
 		integerList.add(4);
 		integerList.add(5);
 		integerList.add(8);
@@ -30,7 +30,7 @@ public class QuickSelect extends Sorter{
 		list.set(right, pivotVal);
 		int storeIndex = left;
 		for(int i = left; i < right; i++) {
-			if(list.get(i) < pivotVal) {
+			if(comp.compare(list.get(i), pivotVal) < 0) {
 				int temp = list.get(storeIndex);
 				list.set(storeIndex, list.get(i));
 				list.set(i, temp);
