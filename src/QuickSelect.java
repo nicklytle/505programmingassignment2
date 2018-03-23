@@ -90,7 +90,8 @@ public class QuickSelect extends Sorter {
 		if (right - left > 1) {
 			int pivotIndex;
 			if(right - left >= 9) {
-				int mid = (int) Math.floor((left + right) / 2);
+//				int mid = (int) Math.floor((left + right) / 2);
+				int mid = (left + right)/2;
 				pivotIndex = median(left, list.get(left), right, list.get(right), mid, list.get(mid));
 				int temp = list.get(pivotIndex);
 				list.set(pivotIndex, list.get(right));
