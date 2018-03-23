@@ -88,7 +88,7 @@ public class QuickSelect extends Sorter {
 	 */
 	public static int quickselect(ArrayList<Integer> list, int left, int right, int k) {
 		if (right - left > 1) {
-			int pivotIndex;
+			int pivotIndex = k;
 			if(right - left >= 9) {
 //				int mid = (int) Math.floor((left + right) / 2);
 				int mid = (left + right)/2;
