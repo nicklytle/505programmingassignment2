@@ -87,7 +87,7 @@ public class QuickSelect extends Sorter {
 	 * @return The value of the median
 	 */
 	public static int quickselect(ArrayList<Integer> list, int left, int right, int k) {
-		if (right - left > 10) {
+		if (right - left > 1) {
 			int pivotIndex = right;
 			if (right - left >= 9) {
 				pivotIndex = median(list, left, right);
@@ -115,40 +115,40 @@ public class QuickSelect extends Sorter {
 	public static int median(ArrayList<Integer> L, int left, int right) {
 //		int middle = (int) Math.floor((left + right) / 2);
 		int middle = (left + right) / 2;
-		if(L.get(left) > L.get(middle)) {
-			if(L.get(middle) > L.get(right)) {
-				return middle;
-			} else if (L.get(left) > L.get(right)) {
-				return right;
-			} else {
-				return left;
-			}
-		} else {
-			if (L.get(left) > L.get(right)) {
-				return left;
-			} else if (L.get(middle) > L.get(right)) {
-				return right;
-			} else {
-				return middle;
-			}
-		}
-//		if (comp.compare(L.get(left), L.get(middle)) > 0) {
-//			if (comp.compare(L.get(middle), L.get(right)) > 0) {
+//		if(L.get(left) > L.get(middle)) {
+//			if(L.get(middle) > L.get(right)) {
 //				return middle;
-//			} else if (comp.compare(L.get(left), L.get(right)) > 0) {
+//			} else if (L.get(left) > L.get(right)) {
 //				return right;
 //			} else {
 //				return left;
 //			}
 //		} else {
-//			if (comp.compare(L.get(left), L.get(right)) > 0) {
+//			if (L.get(left) > L.get(right)) {
 //				return left;
-//			} else if (comp.compare(L.get(middle), L.get(right)) > 0) {
+//			} else if (L.get(middle) > L.get(right)) {
 //				return right;
 //			} else {
 //				return middle;
 //			}
 //		}
+		if (comp.compare(L.get(left), L.get(middle)) > 0) {
+			if (comp.compare(L.get(middle), L.get(right)) > 0) {
+				return middle;
+			} else if (comp.compare(L.get(left), L.get(right)) > 0) {
+				return right;
+			} else {
+				return left;
+			}
+		} else {
+			if (comp.compare(L.get(left), L.get(right)) > 0) {
+				return left;
+			} else if (comp.compare(L.get(middle), L.get(right)) > 0) {
+				return right;
+			} else {
+				return middle;
+			}
+		}
 	}
 
 	public static int insertionSortMedian(ArrayList<Integer> L, int left, int right) {
