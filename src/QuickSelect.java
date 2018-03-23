@@ -22,18 +22,18 @@ public class QuickSelect extends Sorter {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		integerList = new ArrayList<>();
-//		integerList.add(10);
-//		integerList.add(4);
-//		integerList.add(5);
-//		integerList.add(8);
-//		integerList.add(6);
-//		integerList.add(11);
-//		integerList.add(26);
-//		integerList.add(32);
-//		integerList.add(2);
-//		integerList.add(9);
-//		integerList.add(22);
+		// integerList = new ArrayList<>();
+		// integerList.add(10);
+		// integerList.add(4);
+		// integerList.add(5);
+		// integerList.add(8);
+		// integerList.add(6);
+		// integerList.add(11);
+		// integerList.add(26);
+		// integerList.add(32);
+		// integerList.add(2);
+		// integerList.add(9);
+		// integerList.add(22);
 
 		read();
 		int mid = (int) Math.floor((integerList.size() - 1) / 2);
@@ -89,10 +89,10 @@ public class QuickSelect extends Sorter {
 	public static int quickselect(ArrayList<Integer> list, int left, int right, int k) {
 		if (right - left > 1) {
 			int pivotIndex = k;
-			if(right - left >= 9) {
-//				int mid = (int) Math.floor((left + right) / 2);
-				int mid = (left + right)/2;
-				pivotIndex = median(left, list.get(left), right, list.get(right), mid, list.get(mid));
+			if (right - left >= 9) {
+				// int mid = (int) Math.floor((left + right) / 2);
+				// int mid = (left + right)/2;
+				pivotIndex = median(list, left, right);
 				int temp = list.get(pivotIndex);
 				list.set(pivotIndex, list.get(right));
 				list.set(right, temp);
@@ -109,24 +109,34 @@ public class QuickSelect extends Sorter {
 			}
 
 		} else {
-			
+
 			return insertionSortMedian(list, left, right);
-//			int mid = (int) Math.floor((sorted.size() - 1) / 2);
-//			return sorted.get(mid);
+			// int mid = (int) Math.floor((sorted.size() - 1) / 2);
+			// return sorted.get(mid);
 		}
 	}
 
-	public static int median(int left, int leftVal, int right, int rightVal, int middle, int middleVal) {
-		int rtol = comp.compare(rightVal, leftVal);
-		if(rtol == comp.compare(middleVal, rightVal)) {
-			return right;
-		} else if (rtol*(-1) == comp.compare(middleVal, leftVal)) {
-			return left;
+	public static int median(ArrayList<Integer> L, int left, int right) {
+		int middle = (left + right) / 2;
+		if (comp.compare(L.get(left), L.get(middle)) > 0) {
+			if (comp.compare(L.get(middle), L.get(right)) > 0) {
+				return middle;
+			} else if (comp.compare(L.get(left), L.get(right)) > 0) {
+				return right;
+			} else {
+				return left;
+			}
 		} else {
-			return middle;
+			if (comp.compare(L.get(left), L.get(right)) > 0) {
+				return left;
+			} else if (comp.compare(L.get(middle), L.get(right)) > 0) {
+				return right;
+			} else {
+				return middle;
+			}
 		}
 	}
-	
+
 	public static int insertionSortMedian(ArrayList<Integer> L, int left, int right) {
 		/*
 		 * One element is removed and then compared to each element until its proper
@@ -142,7 +152,7 @@ public class QuickSelect extends Sorter {
 			}
 			L.set(i + 1, key);
 		}
-		return L.get((int) Math.floor((left + right)/2));
+		return L.get((int) Math.floor((left + right) / 2));
 	}
 
 }
