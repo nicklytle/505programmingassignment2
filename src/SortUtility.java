@@ -17,14 +17,15 @@ public class SortUtility extends Sorter {
 	 */
 	public static void main(String[] args) {
 		// read();
-		integerList = new ArrayList<>();
-		integerList.add(10);
-		integerList.add(4);
-		integerList.add(5);
-		integerList.add(8);
-		integerList.add(6);
+//		integerList = new ArrayList<>();
+//		integerList.add(10);
+//		integerList.add(4);
+//		integerList.add(5);
+//		integerList.add(8);
+//		integerList.add(6);
 		// integerList.add(11);
 		// integerList.add(26);
+		read();
 		startTime = System.nanoTime();
 		Collections.sort(integerList, comp);
 		endTime = System.nanoTime();
