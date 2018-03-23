@@ -90,7 +90,9 @@ public class QuickSelect extends Sorter {
 		if (right - left > 1) {
 			int pivotIndex = k;
 			if(right - left >= 9) {
-				pivotIndex = median(list, left, right);
+//				int mid = (int) Math.floor((left + right) / 2);
+				int mid = (left + right)/2;
+				pivotIndex = median(left, list.get(left), right, list.get(right), mid, list.get(mid));
 				int temp = list.get(pivotIndex);
 				list.set(pivotIndex, list.get(right));
 				list.set(right, temp);
@@ -114,12 +116,11 @@ public class QuickSelect extends Sorter {
 		}
 	}
 
-	public static int median(ArrayList<Integer> L, int left, int right) {
-		int middle = (left + right)/2;
-		int rtol = comp.compare(L.get(right), L.get(left));
-		if(rtol == comp.compare(L.get(middle), L.get(right))) {
+	public static int median(int left, int leftVal, int right, int rightVal, int middle, int middleVal) {
+		int rtol = comp.compare(rightVal, leftVal);
+		if(rtol == comp.compare(middleVal, rightVal)) {
 			return right;
-		} else if (rtol*(-1) == comp.compare(L.get(middle), L.get(left))) {
+		} else if (rtol*(-1) == comp.compare(middleVal, leftVal)) {
 			return left;
 		} else {
 			return middle;
