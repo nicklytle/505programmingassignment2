@@ -17,7 +17,7 @@ public abstract class Sorter {
 	static Scanner in;
 	// static int numItems;
 	static double runtime = 0.0;
-	static float numComparisons = 0;
+	static int numComparisons = 0;
 	static double startTime;
 	static double endTime;
 	static Comparator<Integer> comp = new Counter();

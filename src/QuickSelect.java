@@ -22,20 +22,20 @@ public class QuickSelect extends Sorter {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		 integerList = new ArrayList<>();
-//		 integerList.add(10);
-//		 integerList.add(4);
-//		 integerList.add(5);
-//		 integerList.add(8);
-//		 integerList.add(6);
-//		 integerList.add(11);
-//		 integerList.add(26);
-//		 integerList.add(32);
-//		 integerList.add(2);
-//		 integerList.add(9);
-//		 integerList.add(22);
+		 integerList = new ArrayList<>();
+		 integerList.add(10);
+		 integerList.add(4);
+		 integerList.add(5);
+		 integerList.add(8);
+		 integerList.add(6);
+		 integerList.add(11);
+		 integerList.add(26);
+		 integerList.add(32);
+		 integerList.add(2);
+		 integerList.add(9);
+		 integerList.add(22);
 
-		read();
+//		read();
 		int mid = (int) Math.floor((integerList.size() - 1) / 2);
 		startTime = System.nanoTime();
 		int k = quickselect(integerList, 0, integerList.size() - 1, mid);
@@ -96,9 +96,10 @@ public class QuickSelect extends Sorter {
 				list.set(right, temp);
 			}
 			pivotIndex = partition(list, left, right);
-			if (k == pivotIndex) {
-				return list.get(k);
-			} else if (k < pivotIndex) {
+//			if (k == pivotIndex) {
+//				return list.get(k);
+//			} else 
+			if (k <= pivotIndex) {
 				return quickselect(list, left, right - 1, k);
 			} else {
 				return quickselect(list, left + 1, right, k);
