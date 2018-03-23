@@ -113,7 +113,8 @@ public class QuickSelect extends Sorter {
 	}
 
 	public static int median(ArrayList<Integer> L, int left, int right) {
-		int middle = (int) Math.floor((left + right) / 2);
+//		int middle = (int) Math.floor((left + right) / 2);
+		int middle = (left + right) / 2;
 		if(L.get(left) > L.get(middle)) {
 			if(L.get(middle) > L.get(right)) {
 				return middle;
