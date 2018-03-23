@@ -55,10 +55,9 @@ public abstract class Sorter {
 		 * number of comparisons. Lines 52 and 53 are the output required for class
 		 * where line 55 allows the output to a CSV file to make data analysis easier.
 		 */
-		System.err.println("runtime," + (int) (runtime / 1000000));
-		System.err.println("comparisons," + numComparisons);
-
-		System.out.println(k);
+		System.out.println("median," + k);
+		System.out.println("runtime," + (int) (runtime / 1000000));
+		System.out.println("comparisons," + numComparisons);
 
 		// System.err.println((int) runtime / 1000000 + "," + numComparisons);
 	}
