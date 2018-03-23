@@ -96,13 +96,12 @@ public class QuickSelect extends Sorter {
 				list.set(right, temp);
 			}
 			pivotIndex = partition(list, left, right);
-//			if (k == pivotIndex) {
-//				return list.get(k);
-//			} else 
-			if (k <= pivotIndex) {
-				return quickselect(list, left, right - 1, k);
+			if (k == pivotIndex) {
+				return list.get(k);
+			} else if (k <= pivotIndex) {
+				return quickselect(list, left, pivotIndex - 1, k);
 			} else {
-				return quickselect(list, left + 1, right, k);
+				return quickselect(list, pivotIndex + 1, right, k);
 			}
 
 		} else {
