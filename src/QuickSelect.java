@@ -9,7 +9,9 @@ import java.util.ArrayList;
  *         partitioning occurs in place and is drawn from pseudocode found in
  *         Introduction to Algorithms 3rd e by Cormen. The quickselect algorithm
  *         is largely based off of notes from CSC 505 Moodle site, however
- *         modifications were made to accommodate the program directions.
+ *         modifications were made to accommodate the program directions, such
+ *         as choosing the pivot index as the median of the right, left, and
+ *         middle indices and applying insertion sort at a certain cutoff.
  * 
  *
  */
@@ -21,20 +23,6 @@ public class QuickSelect extends Sorter {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-//		 integerList = new ArrayList<>();
-//		 integerList.add(10);
-//		 integerList.add(4);
-//		 integerList.add(5);
-//		 integerList.add(8);
-//		 integerList.add(6);
-//		 integerList.add(11);
-//		 integerList.add(26);
-//		 integerList.add(32);
-//		 integerList.add(2);
-//		 integerList.add(9);
-//		 integerList.add(22);
-
 		read();
 		int mid = (int) Math.floor((integerList.size() - 1) / 2);
 		startTime = System.nanoTime();
@@ -42,35 +30,6 @@ public class QuickSelect extends Sorter {
 		endTime = System.nanoTime();
 		runtime = endTime - startTime;
 		write(k);
-	}
-
-	/**
-	 * Partitions an array of integers.
-	 * 
-	 * @param list
-	 *            A list of integers to be partitioned
-	 * @param left
-	 *            The first index
-	 * @param right
-	 *            The pivot index, moved to the last index
-	 * @return The index partitioned about
-	 */
-	public static int partition(ArrayList<Integer> list, int left, int right) {
-		int pivotVal = list.get(right);
-		int i = left - 1;
-		for (int j = left; j < right; j++) {
-			if (comp.compare(list.get(j), pivotVal) < 0) {
-				i++;
-				int temp = list.get(i);
-				list.set(i, list.get(j));
-				list.set(j, temp);
-			}
-		}
-		int temp = list.get(i + 1);
-		list.set(i + 1, pivotVal);
-		list.set(right, temp);
-
-		return i + 1;
 	}
 
 	/**
@@ -87,15 +46,33 @@ public class QuickSelect extends Sorter {
 	 * @return The value of the median
 	 */
 	public static int quickselect(ArrayList<Integer> list, int left, int right, int k) {
-		if (right - left > 1) {
+		/*
+		 * The cutoff determines when the algorithm will start using insertion sort
+		 */
+		if (right - left > cutoff) {
+			/*
+			 * The pivot will be moved to the right, so initially setting it to the right
+			 * makes it convenient.
+			 */
 			int pivotIndex = right;
+			/*
+			 * While there are more than 9 elements to sort through, the pivot will be the
+			 * median of the first, middle, and last elements of the sublist.
+			 */
 			if (right - left >= 9) {
 				pivotIndex = median(list, left, right);
 				int temp = list.get(pivotIndex);
 				list.set(pivotIndex, list.get(right));
 				list.set(right, temp);
 			}
+			/*
+			 * Partition about the pivot (now in the right position)
+			 */
 			pivotIndex = partition(list, left, right);
+			/*
+			 * If the middle value is at the pivot index, we've found our median. Otherwise,
+			 * recurse and narrow down the sublist.
+			 */
 			if (k == pivotIndex) {
 				return list.get(k);
 			} else if (k <= pivotIndex) {
@@ -105,33 +82,65 @@ public class QuickSelect extends Sorter {
 			}
 
 		} else {
-
 			return insertionSortMedian(list, left, right);
-			// int mid = (int) Math.floor((sorted.size() - 1) / 2);
-			// return sorted.get(mid);
 		}
 	}
 
+	/**
+	 * Partitions a sublist of integers, list[left...right] in place.
+	 * 
+	 * @param list
+	 *            A list of integers to be partitioned
+	 * @param left
+	 *            The first index
+	 * @param right
+	 *            The pivot index, moved to the last index
+	 * @return The index partitioned about
+	 */
+	public static int partition(ArrayList<Integer> list, int left, int right) {
+		/*
+		 * The pivot value will always be at the right index.
+		 */
+		int pivotVal = list.get(right);
+		int i = left - 1;
+		/*
+		 * Partitions the array so that 
+		 * A[j] <= pivotVal, from left to pivotIndex - 1
+		 * A[pivotIndex] = pivotVal 
+		 * A[j] > pivotVal from pivotIndex + 1 to right
+		 */
+		for (int j = left; j < right; j++) {
+			if (comp.compare(list.get(j), pivotVal) < 0) {
+				i++;
+				int temp = list.get(i);
+				list.set(i, list.get(j));
+				list.set(j, temp);
+			}
+		}
+		/*
+		 * Move the pivot value to its correct place.
+		 */
+		int temp = list.get(i + 1);
+		list.set(i + 1, pivotVal);
+		list.set(right, temp);
+
+		return i + 1;
+	}
+
+	/**
+	 * A helper method to find the median of the left, right, and middle indices in
+	 * a list L.
+	 * 
+	 * @param L
+	 *            the list the indices refer to.
+	 * @param left
+	 *            the left (or first) index.
+	 * @param right
+	 *            the right (or last) index.
+	 * @return the index where the median occurs.
+	 */
 	public static int median(ArrayList<Integer> L, int left, int right) {
-//		int middle = (int) Math.floor((left + right) / 2);
-		int middle = (left + right) / 2;
-//		if(L.get(left) > L.get(middle)) {
-//			if(L.get(middle) > L.get(right)) {
-//				return middle;
-//			} else if (L.get(left) > L.get(right)) {
-//				return right;
-//			} else {
-//				return left;
-//			}
-//		} else {
-//			if (L.get(left) > L.get(right)) {
-//				return left;
-//			} else if (L.get(middle) > L.get(right)) {
-//				return right;
-//			} else {
-//				return middle;
-//			}
-//		}
+		int middle = (int) Math.floor((left + right) / 2);
 		if (comp.compare(L.get(left), L.get(middle)) > 0) {
 			if (comp.compare(L.get(middle), L.get(right)) > 0) {
 				return middle;
@@ -151,6 +160,18 @@ public class QuickSelect extends Sorter {
 		}
 	}
 
+	/**
+	 * A modified version of insertion sort that sorts the sublist L[left...right]
+	 * and returns the middle (median) value of that sublist.
+	 * 
+	 * @param L
+	 *            the list the indices refer to.
+	 * @param left
+	 *            the left (or first) index.
+	 * @param right
+	 *            the right (or last) index.
+	 * @return The middle element of the sorted sublist.
+	 */
 	public static int insertionSortMedian(ArrayList<Integer> L, int left, int right) {
 		/*
 		 * One element is removed and then compared to each element until its proper
@@ -166,7 +187,7 @@ public class QuickSelect extends Sorter {
 			}
 			L.set(i + 1, key);
 		}
-		return L.get((int) Math.floor((left + right) / 2));
+		return L.get((int) Math.floor((left + right) / 2)); // Return the median value.
 	}
 
 }

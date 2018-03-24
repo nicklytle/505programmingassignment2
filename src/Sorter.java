@@ -21,6 +21,7 @@ public abstract class Sorter {
 	static double startTime;
 	static double endTime;
 	static Comparator<Integer> comp = new Counter();
+	static int cutoff = 1;
 
 	/**
 	 * Reads in from Standard Input n, the number of integers to be sorted, and the
